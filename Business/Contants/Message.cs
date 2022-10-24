@@ -15,5 +15,6 @@ namespace Business.Contants
         public static string PasswordError = "Şifre Yanlış.";
         public static string SuccessfullLogin = "Giriş Başarılı.";
         public static string UserAlreadyExits = "Kullanıcı Zaten Mevcut!";
+        public static string UserRegistered = "Kullanıcı Kaydı Gerçekleşti.";
     }
 }

@@ -2,6 +2,7 @@
 using Business.Contants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
 using Entities.Dtos;
 using System;
@@ -35,7 +36,11 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<User>(Message.UserNotFound);
             }
-
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userToCheck.PasswordHash,userToCheck.PasswordSalt))
+            {
+                return new ErrorDataResult<User>(Message.PasswordError);
+            }
+            return new SuccessDataResult<User>(userToCheck,Message.SuccessfullLogin);
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
@@ -45,7 +50,11 @@ namespace Business.Concrete
 
         public IResult UserExists(string email)
         {
-            throw new NotImplementedException();
+            if (_userService.GetByMail(email)!=null)
+            {
+                return new ErrorResult(Message.UserAlreadyExits);
+            }
+            return new SuccessResult();
         }
     }
 }

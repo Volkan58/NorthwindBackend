@@ -12,5 +12,8 @@ namespace Business.Contants
         public static string ProductDeleted = "Ürün Başarıyla Silindi";
         public static string ProductUpdated = "Ürün Başarıyla Güncellendi";
         public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Şifre Yanlış.";
+        public static string SuccessfullLogin = "Giriş Başarılı.";
+        public static string UserAlreadyExits = "Kullanıcı Zaten Mevcut!";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("getList")]
-
+        [Authorize(Roles ="Admin")]
         public IActionResult GetList()
         {
             var result = _productService.GetList();
@@ -39,7 +40,7 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
         }
         [HttpGet("get")]
-
+        
         public IActionResult Get(int productId)
         {
             var result = _productService.GetById(productId);
@@ -50,7 +51,6 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
         }
         [HttpPost("Add")]
-
         public IActionResult Add(Product product)
         {
             var result = _productService.Add(product);
